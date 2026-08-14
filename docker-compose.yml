@@ -1,0 +1,83 @@
+version: "3.8"
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DOMAIN=minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: ["server", "/data", "--console-address", ":9001"]
+    networks:
+      default:
+        aliases:
+          - warehouse.minio      # <--- THIS IS THE MAGIC ALIAS HOOK!
+
+  rest:
+    image: tabulario/iceberg-rest:latest    # <--- SWITCHED TO INDUSTRY-STANDARD IMAGE
+    container_name: iceberg-rest
+    ports:
+      - "8181:8181"
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+      - CATALOG_WAREHOUSE=s3://warehouse/
+      - CATALOG_IO__IMPL=org.apache.iceberg.aws.s3.S3FileIO
+      - CATALOG_S3_ENDPOINT=http://minio:9000
+      #- CATALOG_S3_PATH_STYLE_ACCESS=true   # <--- CLEAN, WELL-SUPPORTED PROPERTY!
+      # Strict double-underscore properties for catalog-level translation
+      - CATALOG_S3_PATH__STYLE__ACCESS=true              # Translates to s3.path-style-access
+      - CATALOG_S3_REGION=us-east-1                      # Translates to s3.region
+      - CATALOG_S3_ACCESS__KEY__ID=admin                 # Translates to s3.access-key-id
+      - CATALOG_S3_SECRET__ACCESS__KEY=password          # Translates to s3.secret-access-key
+    depends_on:
+      - minio
+
+  spark-iceberg:
+    image: tabulario/spark-iceberg:latest
+    container_name: spark-iceberg
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+    ports:
+      - "8888:8888"
+      - "8080:8080"
+    depends_on:
+      - rest
+      - minio
+
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino
+    user: root
+    environment:
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_REGION=us-east-1
+      - CATALOG_WAREHOUSE=s3://warehouse/
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./trino-catalog:/etc/trino/catalog
+    depends_on:
+      - rest
+      - minio
+
+  minio-provisioner:
+    image: minio/mc:latest
+    container_name: minio-provisioner
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set localminio http://minio:9000 admin password;
+      until (/usr/bin/mc ls localminio) do echo 'Waiting for MinIO API to respond...' && sleep 1; done;
+      /usr/bin/mc mb --ignore-existing localminio/warehouse;
+      echo 'Warehouse bucket successfully provisioned!';
+      exit 0;
+      "
