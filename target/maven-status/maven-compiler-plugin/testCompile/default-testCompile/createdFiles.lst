@@ -1,0 +1,9 @@
+com\lakehouse\cases\DataIngestionTest.class
+com\lakehouse\cases\SchemaEvolutionTest.class
+com\lakehouse\client\TrinoClient.class
+com\lakehouse\base\BaseTest.class
+com\lakehouse\cases\DataIngestionTest$ClickRecord.class
+com\lakehouse\cases\SchemaEvolutionTest$ProfileRecord.class
+com\lakehouse\cases\SparkResilienceTest$ProcessResult.class
+com\lakehouse\cases\SparkResilienceTest.class
+com\lakehouse\cases\ResilienceTest.class

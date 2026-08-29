@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.lakehouse.cases.SparkResilienceTest" time="37.004" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="26"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="D:\Deepti\Study\lakehouse-automation-tests\target\test-classes;D:\Deepti\Study\lakehouse-automation-tests\target\classes;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.1\junit-jupiter-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.1\junit-jupiter-api-5.10.1.jar;C:\Users\Hi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.1\junit-platform-commons-1.10.1.jar;C:\Users\Hi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.1\junit-jupiter-params-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.1\junit-jupiter-engine-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.1\junit-platform-engine-1.10.1.jar;C:\Users\Hi\.m2\repository\io\trino\trino-jdbc\433\trino-jdbc-433.jar;C:\Users\Hi\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\Hi\.m2\repository\net\bytebuddy\byte-buddy\1.12.21\byte-buddy-1.12.21.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\s3\2.25.0\s3-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.25.0\aws-xml-protocol-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.25.0\aws-query-protocol-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\protocol-core\2.25.0\protocol-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\arns\2.25.0\arns-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\profiles\2.25.0\profiles-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\crt-core\2.25.0\crt-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth\2.25.0\http-auth-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\identity-spi\2.25.0\identity-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth-spi\2.25.0\http-auth-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth-aws\2.25.0\http-auth-aws-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\checksums\2.25.0\checksums-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\checksums-spi\2.25.0\checksums-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\sdk-core\2.25.0\sdk-core-2.25.0.jar;C:\Users\Hi\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\auth\2.25.0\auth-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-client-spi\2.25.0\http-client-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\regions\2.25.0\regions-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\annotations\2.25.0\annotations-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\utils\2.25.0\utils-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-core\2.25.0\aws-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\metrics-spi\2.25.0\metrics-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\json-utils\2.25.0\json-utils-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.25.0\third-party-jackson-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\endpoints-spi\2.25.0\endpoints-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\apache-client\2.25.0\apache-client-2.25.0.jar;C:\Users\Hi\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\Hi\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Hi\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\Hi\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\netty-nio-client\2.25.0\netty-nio-client-2.25.0.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec-http\4.1.107.Final\netty-codec-http-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec-http2\4.1.107.Final\netty-codec-http2-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec\4.1.107.Final\netty-codec-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport\4.1.107.Final\netty-transport-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-common\4.1.107.Final\netty-common-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-buffer\4.1.107.Final\netty-buffer-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-handler\4.1.107.Final\netty-handler-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.107.Final\netty-transport-native-unix-common-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.107.Final\netty-transport-classes-epoll-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-resolver\4.1.107.Final\netty-resolver-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-jupiter\2.35.3\allure-jupiter-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-junit-platform\2.35.3\allure-junit-platform-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-java-commons\2.35.3\allure-java-commons-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-model\2.35.3\allure-model-2.35.3.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-launcher\1.10.3\junit-platform-launcher-1.10.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-test-filter\2.35.3\allure-test-filter-2.35.3.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="26"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="D:\Program Files\Java\bin"/>
+    <property name="sun.java.command" value="C:\Users\Hi\AppData\Local\Temp\surefire7179627585530486149\surefirebooter-20260829120931573_3.jar C:\Users\Hi\AppData\Local\Temp\surefire7179627585530486149 2026-08-29T12-09-31_199-jvmRun1 surefire-20260829120931573_1tmp surefire_0-20260829120931573_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\Deepti\Study\lakehouse-automation-tests\target\test-classes;D:\Deepti\Study\lakehouse-automation-tests\target\classes;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.1\junit-jupiter-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.1\junit-jupiter-api-5.10.1.jar;C:\Users\Hi\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-commons\1.10.1\junit-platform-commons-1.10.1.jar;C:\Users\Hi\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.1\junit-jupiter-params-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.1\junit-jupiter-engine-5.10.1.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-engine\1.10.1\junit-platform-engine-1.10.1.jar;C:\Users\Hi\.m2\repository\io\trino\trino-jdbc\433\trino-jdbc-433.jar;C:\Users\Hi\.m2\repository\org\assertj\assertj-core\3.24.2\assertj-core-3.24.2.jar;C:\Users\Hi\.m2\repository\net\bytebuddy\byte-buddy\1.12.21\byte-buddy-1.12.21.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\s3\2.25.0\s3-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-xml-protocol\2.25.0\aws-xml-protocol-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-query-protocol\2.25.0\aws-query-protocol-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\protocol-core\2.25.0\protocol-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\arns\2.25.0\arns-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\profiles\2.25.0\profiles-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\crt-core\2.25.0\crt-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth\2.25.0\http-auth-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\identity-spi\2.25.0\identity-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth-spi\2.25.0\http-auth-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\org\reactivestreams\reactive-streams\1.0.4\reactive-streams-1.0.4.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-auth-aws\2.25.0\http-auth-aws-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\checksums\2.25.0\checksums-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\checksums-spi\2.25.0\checksums-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\sdk-core\2.25.0\sdk-core-2.25.0.jar;C:\Users\Hi\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\auth\2.25.0\auth-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\eventstream\eventstream\1.0.1\eventstream-1.0.1.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\http-client-spi\2.25.0\http-client-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\regions\2.25.0\regions-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\annotations\2.25.0\annotations-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\utils\2.25.0\utils-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\aws-core\2.25.0\aws-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\metrics-spi\2.25.0\metrics-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\json-utils\2.25.0\json-utils-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\third-party-jackson-core\2.25.0\third-party-jackson-core-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\endpoints-spi\2.25.0\endpoints-spi-2.25.0.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\apache-client\2.25.0\apache-client-2.25.0.jar;C:\Users\Hi\.m2\repository\org\apache\httpcomponents\httpclient\4.5.13\httpclient-4.5.13.jar;C:\Users\Hi\.m2\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;C:\Users\Hi\.m2\repository\org\apache\httpcomponents\httpcore\4.4.13\httpcore-4.4.13.jar;C:\Users\Hi\.m2\repository\commons-codec\commons-codec\1.15\commons-codec-1.15.jar;C:\Users\Hi\.m2\repository\software\amazon\awssdk\netty-nio-client\2.25.0\netty-nio-client-2.25.0.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec-http\4.1.107.Final\netty-codec-http-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec-http2\4.1.107.Final\netty-codec-http2-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-codec\4.1.107.Final\netty-codec-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport\4.1.107.Final\netty-transport-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-common\4.1.107.Final\netty-common-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-buffer\4.1.107.Final\netty-buffer-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-handler\4.1.107.Final\netty-handler-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport-native-unix-common\4.1.107.Final\netty-transport-native-unix-common-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-transport-classes-epoll\4.1.107.Final\netty-transport-classes-epoll-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\netty\netty-resolver\4.1.107.Final\netty-resolver-4.1.107.Final.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-jupiter\2.35.3\allure-jupiter-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-junit-platform\2.35.3\allure-junit-platform-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-java-commons\2.35.3\allure-java-commons-2.35.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-model\2.35.3\allure-model-2.35.3.jar;C:\Users\Hi\.m2\repository\org\junit\platform\junit-platform-launcher\1.10.3\junit-platform-launcher-1.10.3.jar;C:\Users\Hi\.m2\repository\io\qameta\allure\allure-test-filter\2.35.3\allure-test-filter-2.35.3.jar;"/>
+    <property name="allure.results.directory" value="D:\Deepti\Study\lakehouse-automation-tests\target/allure-results"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Hi"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="D:\Program Files\Java"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\Deepti\Study\lakehouse-automation-tests"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Hi\AppData\Local\Temp\surefire7179627585530486149\surefirebooter-20260829120931573_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="26.0.1+8-34"/>
+    <property name="user.name" value="Hi"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Hi\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\Hi\AppData\Local\Temp\"/>
+    <property name="java.version" value="26.0.1"/>
+    <property name="user.dir" value="D:\Deepti\Study\lakehouse-automation-tests"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="D:\Program Files\Java\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\Hi\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\Hi\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Users\Hi\AppData\Roaming\Code\User\globalStorage\pleiades.java-extension-pack-jdk\gradle\latest\bin;C:\Users\Hi\AppData\Roaming\Code\User\globalStorage\pleiades.java-extension-pack-jdk\maven\latest\bin;D:\Program Files\Java\bin;C:\Python314\Scripts\;C:\Python314\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;D:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;D:\Program Files\apache-maven-3.9.15\bin;C:\Users\Hi\AppData\Local\Microsoft\WindowsApps;D:\Program Files\IntelliJ IDEA 2026.1\bin;D:\Program Files\PyCharm Community Edition 2026.1\bin;C:\Users\Hi\AppData\Roaming\npm;D:\Users\Hi\AppData\Local\Programs\Microsoft VS Code\bin;D:\Program Files\Java\bin;D:\Program Files\apache-maven-3.9.15\bin;C:\Users\Hi\.lmstudio\bin;C:\Users\Hi\AppData\Local\Programs\Antigravity\bin;C:\Users\Hi\AppData\Local\Kingsoft\WPS Office\12.1.0.27458\clitool;c:\Users\Hi\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;c:\Users\Hi\.vscode\extensions\ms-python.debugpy-2026.6.0-win32-x64\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="26.0.1+8-34"/>
+    <property name="stdin.encoding" value="Cp1252"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="70.0"/>
+  </properties>
+  <testcase name="testSparkExecutorCrashMidWriteLeavesOrphansAndRollsBackCleanly" classname="com.lakehouse.cases.SparkResilienceTest" time="36.995">
+    <system-out><![CDATA[
+========== BaseTest.setUp() - Starting test environment setup ==========
+Attempting to drop table 'iceberg.default.customer_clicks' if it exists...
+Attempting to drop table 'iceberg.default.customer_profiles' if it exists...
+S3 client connected. Checking if bucket 'warehouse' exists...
+Bucket 'warehouse' exists. Purging all objects to clean the environment...
+Successfully purged 0 objects. Bucket 'warehouse' is clean.
+Ensuring Iceberg namespace 'default' exists...
+========== BaseTest.setUp() - Completed successfully ==========
+
+Attempting to drop table 'iceberg.default.customer_clicks' if it exists...
+
+================================================================================
+🔍 STAGE 1: BASELINE STATE (PRE-SPARK-CHAOS)
+Bucket Target: warehouse | Object Prefix: default/customer_clicks
+--------------------------------------------------------------------------------
+   📦 PARQUET | 765        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/data/20260829_062040_00432_css5m-31e227bd-9620-4427-bdf8-96c337e0f4d0.parquet
+   📄 METADATA | 2451       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00000-44acb871-ca04-45f5-86a3-69d87d4e8983.metadata.json
+   📄 METADATA | 4964       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00001-f141646f-7059-4ce0-9ba7-cb35f3d96bde.metadata.json
+   📁 OTHER    | 971        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/20260829_062040_00432_css5m-0bc9a9e8-29cd-4134-8334-97aed504cd7c.stats
+   🧬 AVRO     | 7268       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/75a29466-6cc0-4fc7-9e0c-7dbd139cee1a-m0.avro
+   🧬 AVRO     | 4313       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-7821196285935539526-1-831d78cb-312e-4479-ab8d-f26869aa1424.avro
+   🧬 AVRO     | 4490       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-786181004529087239-1-75a29466-6cc0-4fc7-9e0c-7dbd139cee1a.avro
+================================================================================
+
+--- Submitting heavy distributed Spark append job via docker exec ---
+Waiting for Spark to start writing Parquet data before inducing the crash...
+No new parquet data files appeared before the outage window expired. This usually means the Spark append never reached the storage layer in time, so the chaos injection was too early.
+💥 TRIGGERING CHAOS: Abruptly killing Spark container ('docker kill spark-iceberg')...
+✓ Spark job exited with non-zero status as expected (Exit code: 1)
+🩹 HEALING INFRASTRUCTURE: Restarting Spark container...
+Sleeping 3000ms for Spark services to recover...
+Logical row count after Spark container crash: 2
+
+================================================================================
+🔍 STAGE 2: POST-SPARK-CHAOS (STRANDED TASK PARTITIONS)
+Bucket Target: warehouse | Object Prefix: default/customer_clicks
+--------------------------------------------------------------------------------
+   📦 PARQUET | 765        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/data/20260829_062040_00432_css5m-31e227bd-9620-4427-bdf8-96c337e0f4d0.parquet
+   📄 METADATA | 2451       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00000-44acb871-ca04-45f5-86a3-69d87d4e8983.metadata.json
+   📄 METADATA | 4964       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00001-f141646f-7059-4ce0-9ba7-cb35f3d96bde.metadata.json
+   📁 OTHER    | 971        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/20260829_062040_00432_css5m-0bc9a9e8-29cd-4134-8334-97aed504cd7c.stats
+   🧬 AVRO     | 7268       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/75a29466-6cc0-4fc7-9e0c-7dbd139cee1a-m0.avro
+   🧬 AVRO     | 4313       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-7821196285935539526-1-831d78cb-312e-4479-ab8d-f26869aa1424.avro
+   🧬 AVRO     | 4490       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-786181004529087239-1-75a29466-6cc0-4fc7-9e0c-7dbd139cee1a.avro
+================================================================================
+
+Temporarily lowering the remove-orphan retention guard so the cleanup can sweep this simulated outage state...
+
+================================================================================
+🔍 STAGE 3: POST-PURGE STATE (SELF-HEALED STORAGE)
+Bucket Target: warehouse | Object Prefix: default/customer_clicks
+--------------------------------------------------------------------------------
+   📦 PARQUET | 765        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/data/20260829_062040_00432_css5m-31e227bd-9620-4427-bdf8-96c337e0f4d0.parquet
+   📄 METADATA | 2451       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00000-44acb871-ca04-45f5-86a3-69d87d4e8983.metadata.json
+   📄 METADATA | 4964       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/00001-f141646f-7059-4ce0-9ba7-cb35f3d96bde.metadata.json
+   📁 OTHER    | 971        bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/20260829_062040_00432_css5m-0bc9a9e8-29cd-4134-8334-97aed504cd7c.stats
+   🧬 AVRO     | 7268       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/75a29466-6cc0-4fc7-9e0c-7dbd139cee1a-m0.avro
+   🧬 AVRO     | 4313       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-7821196285935539526-1-831d78cb-312e-4479-ab8d-f26869aa1424.avro
+   🧬 AVRO     | 4490       bytes | default/customer_clicks-6dfc5452193b4918b793d50b80b2b7d0/metadata/snap-786181004529087239-1-75a29466-6cc0-4fc7-9e0c-7dbd139cee1a.avro
+================================================================================
+
+Reset iceberg.remove_orphan_files_min_retention to default session state.
+Attempting to drop table 'iceberg.default.customer_clicks' if it exists...
+
+========== BaseTest.tearDown() - Starting cleanup ==========
+Attempting to drop table 'iceberg.default.customer_clicks' if it exists...
+Attempting to drop table 'iceberg.default.customer_profiles' if it exists...
+========== BaseTest.tearDown() - Completed ==========
+
+]]></system-out>
+  </testcase>
+</testsuite>

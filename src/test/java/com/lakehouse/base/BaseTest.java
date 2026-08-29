@@ -1,8 +1,8 @@
 package com.lakehouse.base;
 
 import com.lakehouse.client.TrinoClient;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
@@ -13,38 +13,37 @@ import java.net.URI;
 import java.sql.SQLException;
 
 /**
- * Base test class to manage test lifecycle, JDBC clients, and environment
- * setups.
+ * Base test class to manage test lifecycle, JDBC clients, S3 storage buckets,
+ * and environments.
+ * Prevents inter-test pollution by logically dropping catalog registries before
+ * physical S3 purges.
  */
 public class BaseTest {
-
     protected TrinoClient trinoClient;
-
-    private S3Client s3Client;
+    protected S3Client s3Client; // Marked protected so child classes can access for assertions
     private static final String BUCKET_NAME = "warehouse";
 
     @BeforeEach
     public void setUp() throws SQLException {
         System.out.println("\n========== BaseTest.setUp() - Starting test environment setup ==========");
 
-        // 1. Programmatically delete and recreate the storage bucket to guarantee a
-        // 100% clean slate
-        // recreateWarehouseBucket();
-
-        // 1. Programmatically purge the storage bucket recursively without deleting the
-        // bucket itself
-        cleanWarehouseBucket();
-
-        // 2. Connect to the SQL execution broker (Trino)
+        // 1. Establish the database client connection first
         trinoClient = new TrinoClient();
         trinoClient.connect();
 
-        // Ensure the Iceberg namespace exists before any tests try to write tables.
-        // The REST catalog is already scoped to the iceberg catalog; default is the
-        // namespace, not a nested iceberg.default schema path.
+        // 2. LOGICAL CLEANUP FIRST: Unregister tables from the catalog while S3
+        // metadata files still exist!
+        // This prevents the REST Catalog database from getting out-of-sync with
+        // physical storage.
+        dropTableIfExists("iceberg.default.customer_clicks");
+        dropTableIfExists("iceberg.default.customer_profiles");
+
+        // 3. PHYSICAL CLEANUP SECOND: Purge the raw S3 bucket files cleanly
+        cleanWarehouseBucket();
+
+        // 4. Ensure the Iceberg schema/namespace is declared inside our clean bucket
         System.out.println("Ensuring Iceberg namespace 'default' exists...");
         trinoClient.executeUpdate("CREATE SCHEMA IF NOT EXISTS iceberg.default");
-        // trinoClient.executeUpdate("CREATE SCHEMA IF NOT EXISTS default");
 
         System.out.println("========== BaseTest.setUp() - Completed successfully ==========\n");
     }
@@ -52,6 +51,12 @@ public class BaseTest {
     @AfterEach
     public void tearDown() {
         System.out.println("\n========== BaseTest.tearDown() - Starting cleanup ==========");
+
+        // Logically drop tables at teardown to leave a clean environment for subsequent
+        // test suites
+        dropTableIfExists("iceberg.default.customer_clicks");
+        dropTableIfExists("iceberg.default.customer_profiles");
+
         if (trinoClient != null) {
             trinoClient.close();
         }
@@ -61,101 +66,6 @@ public class BaseTest {
         System.out.println("========== BaseTest.tearDown() - Completed ==========\n");
     }
 
-    /**
-     * Helper to safely drop a table before/after a test case to prevent cross-test
-     * interference.
-     */
-    protected void dropTableIfExists(String tableName) {
-        System.out.println("Attempting to drop table '" + tableName + "' if it exists...");
-        try {
-            trinoClient.executeUpdate("DROP TABLE IF EXISTS " + tableName);
-        } catch (SQLException e) {
-            System.err.println(
-                    "Non-critical cleanup failure: Failed to drop table " + tableName + " - " + e.getMessage());
-        }
-    }
-
-    /**
-     * Connects to MinIO S3 API, purges all active/stale objects, deletes, and
-     * recreates the warehouse bucket.
-     * 
-     * private void recreateWarehouseBucket() {
-     * System.out.println("Recreating S3 bucket '" + BUCKET_NAME + "' for a clean
-     * test environment...");
-     * try {
-     * s3Client = S3Client.builder()
-     * .endpointOverride(URI.create("http://localhost:9000"))
-     * .credentialsProvider(StaticCredentialsProvider.create(
-     * AwsBasicCredentials.create("admin", "password")))
-     * .region(Region.US_EAST_1)
-     * .serviceConfiguration(software.amazon.awssdk.services.s3.S3Configuration.builder()
-     * .pathStyleAccessEnabled(true)
-     * .build())
-     * .build();
-     * 
-     * System.out.println("S3 client connected. Checking if bucket '" + BUCKET_NAME
-     * + "' exists...");
-     * 
-     * // Check if bucket exists
-     * try {
-     * HeadBucketRequest headBucketRequest = HeadBucketRequest.builder()
-     * .bucket(BUCKET_NAME)
-     * .build();
-     * s3Client.headBucket(headBucketRequest);
-     * 
-     * System.out
-     * .println("Bucket '" + BUCKET_NAME + "' exists. Purging all objects to prepare
-     * for deletion...");
-     * 
-     * // S3 Buckets cannot be deleted unless they are completely empty. List and
-     * // delete all objects:
-     * ListObjectsV2Request listObjectsRequest = ListObjectsV2Request.builder()
-     * .bucket(BUCKET_NAME)
-     * .build();
-     * ListObjectsV2Response listObjectsResponse;
-     * 
-     * int deletedCount = 0;
-     * do {
-     * listObjectsResponse = s3Client.listObjectsV2(listObjectsRequest);
-     * for (S3Object s3Object : listObjectsResponse.contents()) {
-     * System.out.println(" Deleting object: " + s3Object.key());
-     * s3Client.deleteObject(DeleteObjectRequest.builder()
-     * .bucket(BUCKET_NAME)
-     * .key(s3Object.key())
-     * .build());
-     * deletedCount++;
-     * }
-     * // Handle pagination for large buckets
-     * listObjectsRequest = listObjectsRequest.toBuilder()
-     * .continuationToken(listObjectsResponse.nextContinuationToken())
-     * .build();
-     * } while (listObjectsResponse.isTruncated());
-     * 
-     * System.out.println("Deleted " + deletedCount + " objects from bucket.");
-     * 
-     * // Delete the bucket
-     * s3Client.deleteBucket(DeleteBucketRequest.builder().bucket(BUCKET_NAME).build());
-     * System.out.println("Bucket '" + BUCKET_NAME + "' successfully deleted.");
-     * 
-     * } catch (NoSuchBucketException e) {
-     * System.out.println("Bucket '" + BUCKET_NAME + "' does not exist yet.
-     * Proceeding straight to creation.");
-     * }
-     * 
-     * // Create the bucket clean
-     * s3Client.createBucket(CreateBucketRequest.builder().bucket(BUCKET_NAME).build());
-     * System.out.println("✓ Bucket '" + BUCKET_NAME + "' successfully recreated and
-     * ready for tests.");
-     * 
-     * } catch (Exception e) {
-     * System.err.println("CRITICAL: Failed to programmatically recreate the S3
-     * bucket: " + e.getMessage());
-     * e.printStackTrace();
-     * throw new RuntimeException("Environment setup failed. S3 bucket cleanup
-     * error.", e);
-     * }
-     * }
-     */
     /**
      * Connects to MinIO S3 API and purges all active/stale objects recursively,
      * keeping the bucket itself alive to prevent S3 connection pool invalidation.
@@ -183,7 +93,6 @@ public class BaseTest {
                 System.out.println(
                         "Bucket '" + BUCKET_NAME + "' exists. Purging all objects to clean the environment...");
 
-                // List and delete all objects recursively (keeping the bucket alive)
                 ListObjectsV2Request listObjectsRequest = ListObjectsV2Request.builder()
                         .bucket(BUCKET_NAME)
                         .build();
@@ -220,4 +129,17 @@ public class BaseTest {
         }
     }
 
+    /**
+     * Helper to safely drop a table before/after a test case to prevent cross-test
+     * interference.
+     */
+    protected void dropTableIfExists(String tableName) {
+        try {
+            System.out.println("Attempting to drop table '" + tableName + "' if it exists...");
+            trinoClient.executeUpdate("DROP TABLE IF EXISTS " + tableName);
+        } catch (SQLException e) {
+            System.err.println(
+                    "Non-critical cleanup failure: Failed to drop table " + tableName + " - " + e.getMessage());
+        }
+    }
 }

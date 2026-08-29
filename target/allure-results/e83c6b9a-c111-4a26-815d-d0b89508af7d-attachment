@@ -1,0 +1,4 @@
+  File "<string>", line 6
+    expr(concat('evt_',
+               ^
+SyntaxError: '(' was never closed
