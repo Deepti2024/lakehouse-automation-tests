@@ -1,0 +1,91 @@
+name: Lakehouse Automation Test Suite
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  lakehouse-integration-tests:
+    name: Run Lakehouse Distributed Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      # Step 1: Check out repository source code
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up JDK 17 with Maven dependency caching
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      # Step 3: Spin up Docker Compose Environment
+      - name: Launch Distributed Lakehouse Stack
+        run: |
+          echo "Starting MinIO, Iceberg REST Catalog, Trino, and Spark..."
+          docker compose up -d
+          docker compose ps
+
+      # Step 4: Healthcheck & Service Readiness Polling
+      # Query engines take 15-30s to initialize metadata caches and bind ports.
+      - name: Wait for Lakehouse Services to be Healthy
+        run: |
+          echo "Waiting for MinIO (port 9000)..."
+          until curl -s -f http://localhost:9000/minio/health/live > /dev/null 2>&1; do
+            echo "MinIO warming up..."
+            sleep 2
+          done
+          echo "✓ MinIO is online."
+
+          echo "Waiting for Iceberg REST Catalog (port 8181)..."
+          until curl -s -f http://localhost:8181/v1/config > /dev/null 2>&1; do
+            echo "REST Catalog initializing..."
+            sleep 2
+          done
+          echo "✓ REST Catalog is online."
+
+          echo "Waiting for Trino Coordinator (port 8082)..."
+          until curl -s -f http://localhost:8082/v1/info > /dev/null 2>&1; do
+            echo "Trino coordinator starting..."
+            sleep 3
+          done
+          echo "✓ Trino Coordinator is ready."
+
+          echo "Waiting for Spark Container (spark-iceberg)..."
+          docker ps | grep spark-iceberg
+          echo "✓ All Lakehouse distributed services are healthy!"
+
+      # Step 5: Execute Test Suite via Maven
+      # surefire.useFile=false prints full test outputs into GitHub Actions logs
+      - name: Execute JUnit 5 Integration & Chaos Tests
+        run: |
+          mvn clean test -Dsurefire.useFile=false
+
+      # Step 6: Generate Allure Test Report
+      - name: Generate Allure HTML Dashboard
+        if: always()
+        run: |
+          mvn allure:report
+
+      # Step 7: Archive Allure Report as Pipeline Artifact
+      - name: Upload Allure Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-execution-report
+          path: target/site/allure-maven-plugin/
+          retention-days: 14
+
+      # Step 8: Clean Teardown
+      - name: Teardown Docker Environment
+        if: always()
+        run: |
+          echo "Tearing down Docker containers and networks..."
+          docker compose down -v
