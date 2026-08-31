@@ -1,0 +1,15 @@
+[81240 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00000-4-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81240 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00001-5-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81130 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00002-6-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81259 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00003-7-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81252 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00004-8-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81319 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00005-9-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81278 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00006-10-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[81185 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/00007-11-7281896e-cba4-45b2-a693-05d520fb8de6-0-00001.parquet
+[765 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/data/20260831_074346_00005_fp3tw-f70b06af-5da4-4335-882c-c462df07b6ab.parquet
+[2451 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/00000-d092b467-029e-455c-8a20-384d3a319ace.metadata.json
+[4974 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/00001-b62daf32-de45-4e10-8ab6-b871d2a4f1f8.metadata.json
+[975 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/20260831_074346_00005_fp3tw-785c03b7-3830-415a-b7df-c35b36a71170.stats
+[7271 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/25e00abc-d98e-4bb5-9066-5ce6c043753e-m0.avro
+[4313 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/snap-1936514132140497115-1-02855d15-7969-4ff2-b4b8-fc28b779e704.avro
+[4489 bytes] default/customer_clicks-3396348754c64a728cd9f982001e448a/metadata/snap-9091817515441278328-1-25e00abc-d98e-4bb5-9066-5ce6c043753e.avro

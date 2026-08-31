@@ -1,0 +1,12 @@
+[765 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/data/20260831_074405_00018_fp3tw-5deead11-6292-47e8-a01d-67afe4fabe34.parquet
+[428059 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/data/20260831_074406_00019_fp3tw-9fe3dcd8-1a1a-4620-8404-f9ef31a93e07.parquet
+[2451 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/00000-6096b3d2-31a8-4e22-bd2c-f441f42f8937.metadata.json
+[4974 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/00001-2ab4f0d6-0a3b-412a-ae4c-55105bf28494.metadata.json
+[7522 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/00002-2119284e-9a4f-40aa-9f6e-328e4e6c83eb.metadata.json
+[975 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/20260831_074405_00018_fp3tw-8128123c-2573-4051-9c4e-bcbd3dbc535c.stats
+[32054 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/20260831_074406_00019_fp3tw-f72fa953-109a-4d69-8798-3ef24147ff5a.stats
+[7280 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/523d09ee-679c-42b3-b780-93d6c5941cf7-m0.avro
+[7265 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/74ee0f78-17cd-4843-ae2c-ce209c726c9d-m0.avro
+[4483 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/snap-1950329341436608505-1-74ee0f78-17cd-4843-ae2c-ce209c726c9d.avro
+[4313 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/snap-3588759273691551148-1-f7b1a88b-9438-4156-9dab-17b369b89cf7.avro
+[4549 bytes] default/customer_clicks-92b1c498a2734a728edebfe790afafb3/metadata/snap-8425672187462735291-1-523d09ee-679c-42b3-b780-93d6c5941cf7.avro
