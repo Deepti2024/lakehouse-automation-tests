@@ -38,7 +38,7 @@ jobs:
         run: mvn allure:report
 
       # --- DEPLOY TO GITHUB PAGES ---
-      - name: Deploy Allure Report to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages and Publish
         if: always() && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
         with:
