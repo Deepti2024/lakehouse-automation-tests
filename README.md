@@ -32,9 +32,13 @@ The framework runs end-to-end integration tests against a containerized distribu
 
 🧪 Test Matrix & Quality Scenarios
   Layer	Test Class	Core Scenario	Validations & Assertions
+ 
   Level A: Ingestion	DataIngestionTest	Batch Data Ingestion via Trino SQL	Table schema creation, multi-row commit, data type fidelity, AssertJ field-level verification.
+  
   Level B: Evolution	SchemaEvolutionTest	Metadata-Only Schema Evolution	Add columns to active table without rewrites; historical rows safely resolve missing columns as NULL.
+  
   Level C: Storage Chaos	ResilienceTest	S3 Network Storage Crash Mid-Write	docker stop -t 0 minio during active 500k-row write. Verifies ACID transaction rollback (zero dirty reads) and administrative orphan file cleanup (ALTER TABLE ... EXECUTE remove_orphan_files).
+  
   Level C: Compute Chaos	SparkResilienceTest	Distributed Spark Worker Crash	docker kill spark-iceberg mid-partition flush. Verifies uncommitted task isolation and physical disk self-healing.
 
 🚀 Key Architectural Innovations & Solved Edge Cases
